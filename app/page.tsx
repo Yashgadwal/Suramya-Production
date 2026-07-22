@@ -336,12 +336,12 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <ImageWithSkeleton
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop"
+              src="/uploads/12.jpg"
               alt="Candid wedding prep shoot Ujjain"
               className="w-full aspect-[4/5] object-cover border border-beige shadow-sm"
             />
             <ImageWithSkeleton
-              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop"
+              src="/uploads/13.jpg"
               alt="Beautiful bride portrait by Suramya Production"
               className="w-full aspect-[4/5] object-cover border border-beige shadow-sm"
               containerClassName="mt-8"
@@ -461,16 +461,7 @@ export default async function HomePage() {
                 <p className="font-sans text-xs text-grey-secondary mt-2 mb-6 font-light">{pkg.description}</p>
                 
                 <div className="mb-6 pb-6 border-b border-beige/30">
-                  {pkg.price ? (
-                    <div>
-                      <span className="text-[10px] uppercase text-grey-secondary tracking-widest block">{pkg.priceType}</span>
-                      <span className="font-serif text-3xl text-gold">₹{pkg.price.toLocaleString("en-IN")}</span>
-                    </div>
-                  ) : (
-                    <div>
-                      <span className="font-serif text-2xl text-gold">Request Quote</span>
-                    </div>
-                  )}
+                  <span className="font-serif text-2xl text-gold">Request Quote</span>
                 </div>
 
                 <ul className="space-y-3.5 text-xs text-charcoal/80 mb-8 font-sans">

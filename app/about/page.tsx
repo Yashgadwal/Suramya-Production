@@ -45,7 +45,7 @@ export default async function AboutPage() {
           </div>
           <div className="relative aspect-[4/3] bg-beige overflow-hidden border border-beige/40 rounded-sm">
             <ImageWithSkeleton
-              src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop"
+              src="/uploads/01.jpg"
               alt="Suramya Production photography team on location"
               className="w-full h-full object-cover"
             />
@@ -64,7 +64,7 @@ export default async function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-[4/5] max-w-md mx-auto bg-beige overflow-hidden border border-beige/40 rounded-sm shadow-sm lg:order-last">
             <ImageWithSkeleton
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+              src="/uploads/10.jpg"
               alt="Saumitra - Founder & Lead Photographer of Suramya Production"
               className="w-full h-full object-cover"
             />

@@ -61,20 +61,7 @@ export default async function PackagesPage() {
                   </p>
 
                   <div className="mb-6 pb-6 border-b border-beige/30">
-                    {pkg.price ? (
-                      <div>
-                        <span className="text-[9px] uppercase text-grey-secondary tracking-widest block font-sans">
-                          {pkg.priceType}
-                        </span>
-                        <span className="font-serif text-3xl sm:text-4xl text-gold">
-                          ₹{pkg.price.toLocaleString("en-IN")}
-                        </span>
-                      </div>
-                    ) : (
-                      <div>
-                        <span className="font-serif text-2xl text-gold">Request Quote</span>
-                      </div>
-                    )}
+                    <span className="font-serif text-2xl text-gold">Request Quote</span>
                   </div>
 
                   <ul className="space-y-3.5 text-xs text-charcoal/80 mb-8 font-sans">

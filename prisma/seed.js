@@ -1,7 +1,19 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const path = require('path');
 
 const prisma = new PrismaClient();
+
+// Helper to get local uploaded images
+const getLocalImages = () => {
+  const uploadsDir = path.join(__dirname, '../public/uploads');
+  if (fs.existsSync(uploadsDir)) {
+    const files = fs.readdirSync(uploadsDir);
+    return files.filter(f => f.match(/\.(jpg|jpeg|png|gif|webp)$/i)).map(f => `/uploads/${f}`);
+  }
+  return [];
+};
 
 async function main() {
   console.log('Clearing database tables for fresh seeding...');
@@ -12,6 +24,31 @@ async function main() {
   await prisma.service.deleteMany();
   await prisma.blogPost.deleteMany();
   console.log('Database tables cleared.');
+
+  // Set up local image lookup
+  const localImages = getLocalImages();
+  let imgIdx = 0;
+  const getImg = (fallback) => {
+    if (localImages.length > 0) {
+      const img = localImages[imgIdx % localImages.length];
+      imgIdx++;
+      return img;
+    }
+    return fallback;
+  };
+
+  // Helper to generate a gallery array
+  const getGallery = (count, fallbackArray) => {
+    if (localImages.length > 0) {
+      const gallery = [];
+      for (let i = 0; i < count; i++) {
+        gallery.push(localImages[(imgIdx + i) % localImages.length]);
+      }
+      imgIdx += count;
+      return JSON.stringify(gallery);
+    }
+    return JSON.stringify(fallbackArray);
+  };
 
   // 1. Seed Admin User
   const adminPassword = await bcrypt.hash('Suramya@2026', 10);
@@ -60,7 +97,7 @@ async function main() {
     {
       name: 'Wedding Photography',
       slug: 'wedding-photography',
-      featuredImage: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop',
+      featuredImage: getImg('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop'),
       description: 'Candid and contemporary photography that documents your love story, capturing both the grandeur of the ceremonies and the intimacy of stolen glances.',
       inclusions: JSON.stringify([
         'Lead Candid Photographer',
@@ -77,7 +114,7 @@ async function main() {
     {
       name: 'Wedding Cinematography',
       slug: 'wedding-cinematography',
-      featuredImage: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=1200&auto=format&fit=crop',
+      featuredImage: getImg('https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=1200&auto=format&fit=crop'),
       description: 'Cinematic storytelling that brings your wedding day to life. From drone shots to emotional sound bites, we create a movie you\'ll watch forever.',
       inclusions: JSON.stringify([
         'Cinematic Director',
@@ -94,7 +131,7 @@ async function main() {
     {
       name: 'Pre-Wedding Shoots',
       slug: 'pre-wedding-shoot',
-      featuredImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
+      featuredImage: getImg('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop'),
       description: 'Fun, romantic, and stylized photo & video sessions in gorgeous locations around Ujjain or travel destinations, celebrating your journey before the wedding.',
       inclusions: JSON.stringify([
         'One-day outdoor shoot (2-3 locations)',
@@ -111,7 +148,7 @@ async function main() {
     {
       name: 'Baby and Maternity Shoots',
       slug: 'baby-maternity-shoot',
-      featuredImage: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop',
+      featuredImage: getImg('https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop'),
       description: 'Delicate, cozy, and high-quality photography celebrating the beauty of new motherhood and the innocence of your newborn\'s first days.',
       inclusions: JSON.stringify([
         'Studio set up or home session',
@@ -233,7 +270,7 @@ async function main() {
     {
       name: 'Rahul & Shruti Shrivastava',
       type: 'Wedding Shoot',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
+      avatar: getImg('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'),
       review: 'Suramya Production captured our wedding at Mahakal Lok area beautifully. The team was extremely polite and didn\'t force us into uncomfortable poses. The final cinematic wedding film was like a bollywood movie. Recommended to everyone in Ujjain!',
       rating: 5,
       sourceUrl: 'https://www.justdial.com/',
@@ -243,7 +280,7 @@ async function main() {
     {
       name: 'Amit & Priya Sharma',
       type: 'Pre-Wedding Shoot',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop',
+      avatar: getImg('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop'),
       review: 'Our pre-wedding shoot in Nanakheda and shipra river ghats was amazing. The photographer guided us on every pose and expression. We got our photos on time, and they are stunning.',
       rating: 5,
       sourceUrl: 'https://www.google.com/',
@@ -264,13 +301,13 @@ async function main() {
     {
       title: 'Devashish & Riya\'s Royal Ujjain Wedding',
       slug: 'devashish-riya-royal-wedding',
-      coverImage: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop',
+      coverImage: getImg('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop'),
       clientName: 'Devashish & Riya',
       category: 'Wedding',
       location: 'Nanakheda, Ujjain',
       date: new Date('2026-05-15'),
       description: 'An elegant, rich Indian wedding celebrating culture, rituals, and intense love. The couple wanted candid storytelling focusing on tears, laughter, and gold details.',
-      photographs: JSON.stringify([
+      photographs: getGallery(4, [
         'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop',
@@ -285,13 +322,13 @@ async function main() {
     {
       title: 'Romance by the Shipra: Saurabh & Aditi',
       slug: 'saurabh-aditi-prewedding',
-      coverImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop', // Verified COUPLE Image
+      coverImage: getImg('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop'),
       clientName: 'Saurabh & Aditi',
       category: 'Pre-Wedding',
       location: 'Ram Ghat, Ujjain',
       date: new Date('2026-04-10'),
       description: 'A serene and dreamlike pre-wedding shoot at sunrise by the ghats of Ujjain, featuring traditional attire, smoke bombs, and modern casual portraits.',
-      photographs: JSON.stringify([
+      photographs: getGallery(3, [
         'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop',
         'https://images.unsplash.com/photo-151097252790b-af4f42d91499?q=80&w=1200&auto=format&fit=crop'
@@ -305,13 +342,13 @@ async function main() {
     {
       title: 'Kabir & Ananya\'s Vibrant Haldi Story',
       slug: 'kabir-ananya-haldi-story',
-      coverImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop', // Beautiful yellow/marigold wedding cover
+      coverImage: getImg('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop'),
       clientName: 'Kabir & Ananya',
       category: 'Haldi',
       location: 'Freeganj, Ujjain',
       date: new Date('2026-06-02'),
       description: 'A colorful, marigold-drenched celebration featuring yellow theme settings, water splashes, and intense family joy in Ujjain.',
-      photographs: JSON.stringify([
+      photographs: getGallery(2, [
         'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop'
       ]),
@@ -352,16 +389,16 @@ async function main() {
       id: 'faq-3',
       key: 'travel',
       value: JSON.stringify({
-        question: 'Do you travel outside Ujjain?',
-        answer: 'Absolutely. While we are based in Nanakheda, Ujjain, we cover destination weddings and shoots all across Madhya Pradesh (Indore, Bhopal, Gwalior) and rest of India. Travel and accommodation charges are covered by the client.'
+        question: 'Are you available to travel outside Ujjain?',
+        answer: 'Absolutely! While we are based in Ujjain, we travel across Madhya Pradesh (Indore, Bhopal, Gwalior) and India for destination weddings. Travel and accommodation charges are typically handled by the client.'
       })
     },
     {
       id: 'faq-4',
       key: 'deliverables_time',
       value: JSON.stringify({
-        question: 'When will we receive our edited photographs?',
-        answer: 'Our standard delivery timeline is 4 to 6 weeks for fully edited digital images and 6 to 8 weeks for the final wedding film and printed albums. We also offer express editing packages for faster delivery.'
+        question: 'What is the delivery timeline for photos and films?',
+        answer: 'We deliver sneak peeks within 3-5 days. The fully processed high-resolution digital image gallery is delivered within 4-6 weeks, and custom wedding albums/highlight films are delivered within 8-10 weeks of the ceremony.'
       })
     }
   ];
@@ -375,13 +412,13 @@ async function main() {
   }
   console.log('Seeded FAQs.');
 
-  // 8. Seed Blog
+  // 8. Seed Blog Posts
   const blogs = [
     {
       title: 'Planning Your Pre-Wedding Shoot in Ujjain: Best Locations & Outfits',
       slug: 'planning-pre-wedding-shoot-ujjain-locations-outfits',
       content: 'Ujjain offers a gorgeous mix of spiritual ghats, historic architecture, and modern scenic parks. In this guide, we break down our top shoot locations—such as Ram Ghat, Mahakal Lok Corridor, and Indore Road resorts—along with styling tips for the perfect romantic pre-wedding frames.',
-      coverImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop',
+      coverImage: getImg('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop'),
       category: 'Pre-Wedding Tips',
       tags: 'Pre-Wedding, Ujjain, Outfits, Locations',
       author: 'Saumitra Suramya',
@@ -404,7 +441,7 @@ async function main() {
     {
       title: 'A Tale of Love: Ritesh & Divya',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=800&auto=format&fit=crop'),
       isVertical: false,
       description: 'Highlight wedding film of Ritesh and Divya showcasing their vibrant haldi in Nanakheda and reception in Indore.',
       featured: true,
@@ -413,7 +450,7 @@ async function main() {
     {
       title: 'Royalty in Ujjain: Devashish & Riya',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop'),
       isVertical: false,
       description: 'Cinematic royal wedding highlighting core Indian rituals at Mahakal Corridor, Ujjain.',
       featured: true,
@@ -422,7 +459,7 @@ async function main() {
     {
       title: 'Sunrise Romance: Saurabh & Aditi',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop'),
       isVertical: false,
       description: 'A beautiful morning sunrise prewedding teaser on the Shipra River Ram Ghat.',
       featured: true,
@@ -431,7 +468,7 @@ async function main() {
     {
       title: 'Haldi Joy: Kabir & Ananya',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop'),
       isVertical: true,
       description: 'Instagram reel showing marigold color splashes and joy in Freeganj, Ujjain.',
       featured: true,
@@ -440,7 +477,7 @@ async function main() {
     {
       title: 'Bride\'s Entry Highlight Teaser',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop'),
       isVertical: true,
       description: 'Slow motion reel of Riya entering the mandap under phoolon ki chadar.',
       featured: true,
@@ -449,7 +486,7 @@ async function main() {
     {
       title: 'Traditional Ring Ceremony',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop'),
       isVertical: true,
       description: 'Romantic ring swap closeups and emotional couple glances.',
       featured: true,
@@ -458,7 +495,7 @@ async function main() {
     {
       title: 'Pre-wedding Sunrise Magic',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
-      thumbnail: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop',
+      thumbnail: getImg('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop'),
       isVertical: true,
       description: 'Short pre-wedding cinematic teaser reel.',
       featured: true,
