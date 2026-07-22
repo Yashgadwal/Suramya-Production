@@ -1,0 +1,222 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  username     String     @unique
+  passwordHash String
+  role         String     @default("Admin") // Super Admin, Admin, Content Editor, Sales Manager, Photographer
+  active       Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  auditLogs    AuditLog[]
+}
+
+model Lead {
+  id             String      @id @default(uuid())
+  enquiryId      String      @unique // Unique reference ID (e.g. SUR-1001)
+  shootType      String // Wedding, Pre-Wedding, Engagement, Haldi, etc.
+  eventDate      DateTime
+  altDate        DateTime?
+  city           String
+  venue          String?
+  guestCount     Int?
+  servicesNeeded String // JSON array of services selected
+  name           String
+  phone          String
+  whatsapp       String
+  email          String
+  budget         String?
+  source         String? // Instagram, Google, Referral, Justdial, etc.
+  message        String?
+  status         String      @default("New") // New, Contacted, Follow-Up, Consultation Scheduled, Quote Sent, Negotiation, Booked, Completed, Lost, Spam
+  notes          LeadNote[]
+  followUps      FollowUp[]
+  events         Event[]
+  quotedAmount   Float?
+  advancePaid    Float?
+  remainingDue   Float?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model LeadNote {
+  id        String   @id @default(uuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  content   String
+  createdBy String
+  createdAt DateTime @default(now())
+}
+
+model FollowUp {
+  id        String   @id @default(uuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  date      DateTime
+  title     String
+  notes     String?
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  title     String
+  date      DateTime
+  type      String // Booking, Tentative, Follow-up, Editing Deadline, Delivery Date
+  notes     String?
+  color     String   @default("gold") // gold, red, blue, green, etc.
+  leadId    String?
+  lead      Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
+
+model Service {
+  id             String   @id @default(uuid())
+  name           String
+  slug           String   @unique
+  featuredImage  String
+  description    String
+  inclusions     String // JSON array of items included
+  customerType   String
+  displayOrder   Int      @default(0)
+  enabled        Boolean  @default(true)
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Package {
+  id                    String   @id @default(uuid())
+  name                  String
+  price                 Float? // Optional price
+  priceType             String   @default("Starting From") // Starting From, Request Quote, Fixed
+  description           String
+  hoursCovered          Int?
+  photographersCount    Int      @default(0)
+  videographersCount    Int      @default(0)
+  deliverables          String // JSON array of text details
+  albumsCount           Int      @default(0)
+  droneEnabled          Boolean  @default(false)
+  reelsEnabled          Boolean  @default(false)
+  highlightFilmEnabled  Boolean  @default(false)
+  deliveryWeeks         Int      @default(6)
+  badge                 String? // e.g. "Most Popular"
+  featured              Boolean  @default(false)
+  order                 Int      @default(0)
+  visible               Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model PortfolioProject {
+  id             String   @id @default(uuid())
+  title          String
+  slug           String   @unique
+  coverImage     String
+  clientName     String
+  category       String // Wedding, Pre-Wedding, Haldi, Mehendi, Bridal, Baby, Fashion, Events, Films
+  location       String
+  date           DateTime
+  description    String
+  photographs    String // JSON string of array of strings
+  videos         String // JSON string of array of video URLs/JSON objects
+  credits        String? // JSON string
+  vendors        String? // JSON string
+  featured       Boolean  @default(false)
+  draft          Boolean  @default(false)
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model WeddingFilm {
+  id          String   @id @default(uuid())
+  title       String
+  url         String
+  thumbnail   String
+  isVertical  Boolean  @default(false)
+  description String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  avatar    String?
+  type      String // e.g. Wedding, Pre-wedding
+  review    String
+  rating    Int      @default(5)
+  sourceUrl String?
+  approved  Boolean  @default(true)
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id             String   @id @default(uuid())
+  title          String
+  slug           String   @unique
+  content        String // Markdown or HTML
+  coverImage     String
+  category       String
+  tags           String // Comma separated tags
+  author         String   @default("Suramya Team")
+  draft          Boolean  @default(false)
+  seoTitle       String?
+  seoDescription String?
+  readingTime    Int      @default(3)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ClientGallery {
+  id            String               @id @default(uuid())
+  name          String
+  slug          String               @unique
+  password      String // Password or PIN to enter
+  expiresAt     DateTime?
+  allowDownload Boolean              @default(true)
+  watermarkText String?
+  views         Int                  @default(0)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  media         ClientGalleryMedia[]
+}
+
+model ClientGalleryMedia {
+  id         String        @id @default(uuid())
+  galleryId  String
+  gallery    ClientGallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  url        String
+  alt        String?
+  isFavorite Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+}
+
+model Setting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   String?
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
