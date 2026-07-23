@@ -44,6 +44,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+    verification: {
+      google: "CcQcwt72vBgAW-GdACDcdnyuFrqdl1m8hHtEBL7ejhE",
+    },
     icons: {
       icon: "/favicon.ico",
     },
