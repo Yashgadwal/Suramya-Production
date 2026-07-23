@@ -49,7 +49,7 @@ export default async function Footer() {
             </span>
           </Link>
           <p className="text-xs text-grey-secondary leading-relaxed font-sans max-w-xs">
-            We don\'t simply photograph weddings. We preserve relationships, rituals, and real emotions in Ujjain and beyond.
+            We don\'t simply photograph weddings. We preserve relationships, rituals, and real emotions all over India and beyond.
           </p>
           <div className="flex space-x-4 pt-2">
             {instagram && (

@@ -28,8 +28,8 @@ const rozha = Rozha_One({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  let title = "Suramya Production | Wedding Photography & Cinematography in Ujjain";
-  let description = "Suramya Production is Ujjain's premium wedding photography and cinematography studio. We capture relationships, rituals, and real emotions.";
+  let title = "Suramya Production | Wedding Photography & Cinematography all over India";
+  let description = "Suramya Production is India's premium wedding photography and cinematography studio. We capture relationships, rituals, and real emotions.";
 
   try {
     const titleSetting = await prisma.setting.findUnique({ where: { key: "seo_global_title" } });

@@ -160,7 +160,7 @@ export default async function HomePage() {
       {/* Cinematic Hero Section */}
       <HeroSlideshow
         slides={heroSlides}
-        eyebrow="Wedding Photography & Cinematography in Ujjain"
+        eyebrow="Wedding Photography & Cinematography all over India"
         headline="Your Story Deserves to Be Remembered Beautifully."
         subheadline={`From quiet glances to unforgettable celebrations, Suramya Production transforms your most meaningful moments into photographs and films you will cherish for generations. ${tagline}`}
         trustline="Wedding • Pre-Wedding • Baby Shoot • Fashion • Cinematography"
@@ -520,7 +520,7 @@ export default async function HomePage() {
         <section className="py-20 px-6 max-w-5xl mx-auto text-center w-full">
           <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-gold block mb-3">Service Regions</span>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal mb-4">
-            Photography & Cinematography for Celebrations Across Ujjain
+            Photography & Cinematography for Celebrations Across India
           </h3>
           <p className="font-sans text-xs sm:text-sm text-grey-secondary leading-relaxed font-light mb-8 max-w-3xl mx-auto">
             Based at Nanakheda, we regularly cover weddings, pre-weddings, haldi-mehendi events, and family portfolios in areas such as Freeganj, Indore Road, Mahakal Lok Area, Dewas Road, and surrounding cities. Our team is fully equipped to travel to destination wedding venues across Madhya Pradesh.

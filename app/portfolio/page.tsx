@@ -6,7 +6,7 @@ export const revalidate = 0; // Fresh content
 
 export const metadata: Metadata = {
   title: "Wedding Portfolio | Suramya Production Ujjain",
-  description: "Browse through our collection of premium wedding stories, pre-wedding memories, candid photography galleries, and cinematic films captured in Ujjain.",
+  description: "Browse through our collection of premium wedding stories, pre-wedding memories, candid photography galleries, and cinematic films captured all over India.",
 };
 
 export default async function PortfolioPage() {

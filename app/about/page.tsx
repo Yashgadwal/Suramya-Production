@@ -8,7 +8,7 @@ export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "About Us | Suramya Production Ujjain",
-  description: "Learn about the team behind Suramya Production in Ujjain. Our approach, vision, and founder Saumitra's message on preserving wedding rituals and emotions.",
+  description: "Learn about the team behind Suramya Production all over India. Our approach, vision, and founder Saumitra's message on preserving wedding rituals and emotions.",
 };
 
 export default async function AboutPage() {
@@ -37,7 +37,7 @@ export default async function AboutPage() {
               Preserving Relationships, Rituals and Real Emotions
             </h1>
             <p className="font-sans text-xs sm:text-sm text-grey-secondary leading-relaxed font-light">
-              Founded in Ujjain, {businessName} was born out of a desire to break away from generic, heavily posed wedding photography. We believe that a wedding day is not a photoshoot; it is a sacred boundary of family rituals, unexpected laughter, and quiet emotional moments.
+              Founded all over India, {businessName} was born out of a desire to break away from generic, heavily posed wedding photography. We believe that a wedding day is not a photoshoot; it is a sacred boundary of family rituals, unexpected laughter, and quiet emotional moments.
             </p>
             <p className="font-sans text-xs sm:text-sm text-grey-secondary leading-relaxed font-light">
               Over the years, our dedicated team of candid photographers, drone pilots, and editors have documented hundreds of celebrations, refining our luxury editorial aesthetic that feels authentic and looks premium.

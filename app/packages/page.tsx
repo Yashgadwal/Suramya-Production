@@ -6,8 +6,8 @@ import { Metadata } from "next";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Wedding Photography Packages Ujjain | Suramya Production",
-  description: "View prices, deliverables, and features of our wedding photography, pre-wedding couple shoots, and custom cinematography packages in Ujjain.",
+  title: "Wedding Photography Packages all over India| Suramya Production",
+  description: "View prices, deliverables, and features of our wedding photography, pre-wedding couple shoots, and custom cinematography packages all over India.",
 };
 
 export default async function PackagesPage() {

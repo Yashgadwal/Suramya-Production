@@ -79,7 +79,7 @@ async function main() {
     { key: 'announcement_enabled', value: 'false' },
     { key: 'announcement_text', value: '🎉 Booking Open for the Upcoming Wedding & Festive Season 2026! Reserve your date now.' },
     { key: 'announcement_link', value: '/book' },
-    { key: 'service_areas', value: 'Freeganj, Nanakheda, Mahakal Lok, Ujjain Outer, Indore, Bhopal, Dewas' },
+    { key: 'service_areas', value: 'Freeganj, Nanakheda, Mahakal Lok, all over IndiaOuter, Indore, Bhopal, Dewas' },
     { key: 'growth_partner_credit', value: 'true' }
   ];
 
@@ -108,8 +108,8 @@ async function main() {
       customerType: 'Couples looking for a mix of emotional candid shots and timeless traditional family portraits.',
       displayOrder: 1,
       enabled: true,
-      seoTitle: 'Wedding Photographer in Ujjain | Suramya Production',
-      seoDescription: 'Premium wedding photography services in Ujjain by Suramya Production. Capturing candid emotions and timeless wedding stories.'
+      seoTitle: 'Wedding Photographer all over India | Suramya Production',
+      seoDescription: 'Premium wedding photography services all over India by Suramya Production. Capturing candid emotions and timeless wedding stories.'
     },
     {
       name: 'Wedding Cinematography',
@@ -125,14 +125,14 @@ async function main() {
       customerType: 'Couples who want a cinematic, movie-like record of their wedding rituals and emotional celebrations.',
       displayOrder: 2,
       enabled: true,
-      seoTitle: 'Wedding Cinematography in Ujjain | Suramya Production',
-      seoDescription: 'Cinematic wedding films and high-end videography in Ujjain. Relive your special day with our emotional films.'
+      seoTitle: 'Wedding Cinematography all over India | Suramya Production',
+      seoDescription: 'Cinematic wedding films and high-end videography all over India. Relive your special day with our emotional films.'
     },
     {
       name: 'Pre-Wedding Shoots',
       slug: 'pre-wedding-shoot',
       featuredImage: getImg('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop'),
-      description: 'Fun, romantic, and stylized photo & video sessions in gorgeous locations around Ujjain or travel destinations, celebrating your journey before the wedding.',
+      description: 'Fun, romantic, and stylized photo & video sessions in gorgeous locations across India or travel destinations, celebrating your journey before the wedding.',
       inclusions: JSON.stringify([
         'One-day outdoor shoot (2-3 locations)',
         'Romantic teaser video (1 min)',
@@ -142,8 +142,8 @@ async function main() {
       customerType: 'Engaged couples wanting to capture their chemistry and create beautiful announcements or save-the-date media.',
       displayOrder: 3,
       enabled: true,
-      seoTitle: 'Pre-Wedding Photographer Ujjain | Suramya Production',
-      seoDescription: 'Beautiful pre-wedding photo and video shoots in Ujjain. Creative concepts, stunning locations, and romantic storytelling.'
+      seoTitle: 'Pre-Wedding Photographer all over India| Suramya Production',
+      seoDescription: 'Beautiful pre-wedding photo and video shoots all over India. Creative concepts, stunning locations, and romantic storytelling.'
     },
     {
       name: 'Baby and Maternity Shoots',
@@ -159,8 +159,8 @@ async function main() {
       customerType: 'New and expecting parents seeking to preserve the magical milestone of pregnancy and childhood.',
       displayOrder: 4,
       enabled: true,
-      seoTitle: 'Baby Photographer in Ujjain | Suramya Production',
-      seoDescription: 'Professional baby photography, newborn, and maternity shoots in Ujjain. Safe and warm studio settings.'
+      seoTitle: 'Baby Photographer all over India | Suramya Production',
+      seoDescription: 'Professional baby photography, newborn, and maternity shoots all over India. Safe and warm studio settings.'
     }
   ];
 
@@ -271,7 +271,7 @@ async function main() {
       name: 'Rahul & Shruti Shrivastava',
       type: 'Wedding Shoot',
       avatar: getImg('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'),
-      review: 'Suramya Production captured our wedding at Mahakal Lok area beautifully. The team was extremely polite and didn\'t force us into uncomfortable poses. The final cinematic wedding film was like a bollywood movie. Recommended to everyone in Ujjain!',
+      review: 'Suramya Production captured our wedding at Mahakal Lok area beautifully. The team was extremely polite and didn\'t force us into uncomfortable poses. The final cinematic wedding film was like a bollywood movie. Recommended to everyone all over India!',
       rating: 5,
       sourceUrl: 'https://www.justdial.com/',
       approved: true,
@@ -299,7 +299,7 @@ async function main() {
   // 6. Seed Portfolio Projects
   const portfolio = [
     {
-      title: 'Devashish & Riya\'s Royal Ujjain Wedding',
+      title: 'Devashish & Riya\'s Royal all over IndiaWedding',
       slug: 'devashish-riya-royal-wedding',
       coverImage: getImg('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop'),
       clientName: 'Devashish & Riya',
@@ -317,7 +317,7 @@ async function main() {
       featured: true,
       draft: false,
       seoTitle: 'Devashish and Riya Wedding | Suramya Production',
-      seoDescription: 'Browse the royal Indian wedding photos of Devashish and Riya in Ujjain captured by Suramya Production.'
+      seoDescription: 'Browse the royal Indian wedding photos of Devashish and Riya all over India captured by Suramya Production.'
     },
     {
       title: 'Romance by the Shipra: Saurabh & Aditi',
@@ -347,7 +347,7 @@ async function main() {
       category: 'Haldi',
       location: 'Freeganj, Ujjain',
       date: new Date('2026-06-02'),
-      description: 'A colorful, marigold-drenched celebration featuring yellow theme settings, water splashes, and intense family joy in Ujjain.',
+      description: 'A colorful, marigold-drenched celebration featuring yellow theme settings, water splashes, and intense family joy all over India.',
       photographs: getGallery(2, [
         'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop'
@@ -390,7 +390,7 @@ async function main() {
       key: 'travel',
       value: JSON.stringify({
         question: 'Are you available to travel outside Ujjain?',
-        answer: 'Absolutely! While we are based in Ujjain, we travel across Madhya Pradesh (Indore, Bhopal, Gwalior) and India for destination weddings. Travel and accommodation charges are typically handled by the client.'
+        answer: 'Absolutely! While we are based all over India, we travel across Madhya Pradesh (Indore, Bhopal, Gwalior) and India for destination weddings. Travel and accommodation charges are typically handled by the client.'
       })
     },
     {
@@ -415,16 +415,16 @@ async function main() {
   // 8. Seed Blog Posts
   const blogs = [
     {
-      title: 'Planning Your Pre-Wedding Shoot in Ujjain: Best Locations & Outfits',
+      title: 'Planning Your Pre-Wedding Shoot all over India: Best Locations & Outfits',
       slug: 'planning-pre-wedding-shoot-ujjain-locations-outfits',
-      content: 'Ujjain offers a gorgeous mix of spiritual ghats, historic architecture, and modern scenic parks. In this guide, we break down our top shoot locations—such as Ram Ghat, Mahakal Lok Corridor, and Indore Road resorts—along with styling tips for the perfect romantic pre-wedding frames.',
+      content: 'all over Indiaoffers a gorgeous mix of spiritual ghats, historic architecture, and modern scenic parks. In this guide, we break down our top shoot locations—such as Ram Ghat, Mahakal Lok Corridor, and Indore Road resorts—along with styling tips for the perfect romantic pre-wedding frames.',
       coverImage: getImg('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop'),
       category: 'Pre-Wedding Tips',
       tags: 'Pre-Wedding, Ujjain, Outfits, Locations',
       author: 'Saumitra Suramya',
       draft: false,
-      seoTitle: 'Pre-Wedding Shoot Guide Ujjain | Suramya Production',
-      seoDescription: 'Learn about the best locations, timings, and outfits for a romantic pre-wedding photo shoot in Ujjain.',
+      seoTitle: 'Pre-Wedding Shoot Guide all over India| Suramya Production',
+      seoDescription: 'Learn about the best locations, timings, and outfits for a romantic pre-wedding photo shoot all over India.',
       readingTime: 4
     }
   ];
@@ -448,7 +448,7 @@ async function main() {
       order: 1
     },
     {
-      title: 'Royalty in Ujjain: Devashish & Riya',
+      title: 'Royalty all over India: Devashish & Riya',
       url: 'https://www.youtube.com/embed/ysz5S6PUM-U',
       thumbnail: getImg('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop'),
       isVertical: false,
