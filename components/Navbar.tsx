@@ -86,7 +86,7 @@ export default function Navbar({ businessName }: NavbarProps) {
             className="group flex flex-col focus:outline-none leading-none max-w-[200px] sm:max-w-none"
           >
             <span className={`font-hindi text-lg sm:text-xl md:text-2xl tracking-[0.05em] whitespace-nowrap transition-colors duration-300 group-hover:text-gold ${logoColorClass}`}>
-              सुरम्या प्रोडक्शन
+              सुरम्य प्रोडक्शन
             </span>
             <span className="text-[8px] tracking-[0.25em] sm:tracking-[0.32em] uppercase text-grey-secondary mt-1 pl-0.5">
               STUDIO
@@ -163,7 +163,7 @@ export default function Navbar({ businessName }: NavbarProps) {
               className="flex flex-col"
             >
               <span className="font-hindi text-xl tracking-wide text-charcoal">
-                सुरम्या प्रोडक्शन
+                सुरम्य प्रोडक्शन
               </span>
               <span className="text-[8px] tracking-[0.2em] uppercase text-grey-secondary -mt-1 pl-0.5">
                 STUDIO

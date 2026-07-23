@@ -42,7 +42,7 @@ export default async function Footer() {
         <div className="flex flex-col space-y-4">
           <Link href="/" className="flex flex-col">
             <span className="font-hindi text-2xl tracking-wide text-charcoal">
-              सुरम्या प्रोडक्शन
+              सुरम्य प्रोडक्शन
             </span>
             <span className="text-[9px] tracking-[0.25em] uppercase text-grey-secondary -mt-1 pl-0.5">
               STUDIO

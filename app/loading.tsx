@@ -18,7 +18,7 @@ export default function Loading() {
           className="font-hindi text-[10px] tracking-wide text-charcoal/50 animate-pulse mt-1"
           suppressHydrationWarning={true}
         >
-          सुरम्या
+          सुरम्य
         </span>
       </div>
     </div>
